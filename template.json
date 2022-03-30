@@ -1,0 +1,26 @@
+{
+    "variables": {
+      "my_token":""
+    },
+    "builders": [
+      {
+        "type": "digitalocean",
+        "ssh_username": "root",
+        "api_token": "{{ user `my_token` }}",
+        "image": "ubuntu-20-04-x64",
+        "region": "nyc1",
+        "size": "s-2vcpu-2gb-intel"
+      }],
+    "provisioners": [{
+        "type":"shell",
+        "scripts":["prepare.sh"]
+      },
+      {
+        "type":"file",
+        "source":"liveswitch-docker-compose/",
+        "destination":"/opt/liveswitch"
+      },{
+        "type":"shell",
+        "scripts":["install.sh"]
+      }]
+  }
