@@ -21,6 +21,10 @@
         "destination":"/opt/liveswitch"
       },{
         "type":"shell",
-        "scripts":["install.sh"]
+        "scripts":["install.sh", "cleanup.sh", "img_check.sh"]
+      },{
+        "type":"shell",
+        "expect_disconnect": true,
+        "scripts":["finalize.sh"]
       }]
   }
