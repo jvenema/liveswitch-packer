@@ -6,7 +6,7 @@
       {
         "type": "digitalocean",
         "ssh_username": "root",
-        "api_token": "{{ user `my_token` }}",
+        "api_token": "{{ user `digitalocean_token` }}",
         "image": "ubuntu-20-04-x64",
         "region": "nyc1",
         "size": "s-2vcpu-2gb-intel"

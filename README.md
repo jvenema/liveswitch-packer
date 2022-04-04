@@ -5,7 +5,7 @@ Create a variables.json in the root. Add your digitalocean token to it like this
 
 ```json
 {
-    "my_token":"dop_v1_xxxxx"
+    "digitalocean_token":"dop_v1_xxxxx"
 }
 ```
 
