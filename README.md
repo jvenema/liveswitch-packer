@@ -24,15 +24,19 @@ Go to packer.io for details on this one. Then make sure you run:
 
 ```bash
 packer init .
+```
+
+If you want to clean up formatting:
+
+```bash
 packer fmt .
-packer validate .
 ```
 
 # Validate the configuration
-`packer validate template.pkr.hcl`
+`packer validate .`
 
 # Build a new image
-`packer build template.pkr.hcl`
+`packer build .`
 
 # Misc notes
 

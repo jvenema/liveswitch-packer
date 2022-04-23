@@ -12,15 +12,16 @@ source "amazon-ebs" "ubuntu" {
   instance_type = "t2.micro"
   source_ami_filter {
     filters = {
-      name                = "ubuntu/images/*ubuntu-xenial-16.04-amd64-server-*"
+      name                = "ubuntu/images/*ubuntu-*-20.04-amd64-server-*"
       root-device-type    = "ebs"
       virtualization-type = "hvm"
     }
     most_recent = true
     owners      = ["099720109477"]
   }
-  access_key   = "x"
-  secret_key   = "y/K7MDENG/bPxRfiCYEXAMPLEKEY"
+  access_key   = var.aws_access_key_id
+  secret_key   = var.aws_secret_access_key
+  
   region       = "us-east-1"
   ssh_username = "ubuntu"
 }
@@ -63,7 +64,7 @@ build {
   }
 
   provisioner "file" {
-    destination = "/opt/liveswitch"
+    destination = "/tmp"
     source      = "liveswitch-docker-compose/"
   }
 

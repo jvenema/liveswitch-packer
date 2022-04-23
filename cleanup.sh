@@ -12,7 +12,8 @@ set -o errexit
 if [[ ! -d /tmp ]]; then
   mkdir /tmp
 fi
-chmod 1777 /tmp
+# the || true ignores failures - fix for AWS
+chmod 1777 /tmp || true 
 
 if [ -n "$(command -v yum)" ]; then
   yum update -y
