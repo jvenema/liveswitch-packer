@@ -1,2 +1,3 @@
 variables.json
 liveswitch-docker-compose
+variables.auto.pkrvars.hcl

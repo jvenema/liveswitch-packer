@@ -1,30 +1,38 @@
 # Configure
 
 ### Set environment variables
-Create a variables.json in the root. Add your digitalocean token or Azure credentials to it like this:
+Create a variables.auto.pkrvars.hcl in the root. Add your digitalocean token or Azure credentials to it like this:
 
 ```json
-{
-    "digitalocean_token":"dop_v1_xxxxx",
-    "azure_client_id":"xxx",
-    "azure_tenant_id":"xxx",
-    "azure_subscription_id":"xxx",
-    "azure_client_secret":"xxx"
-}
+digitalocean_token=""
+azure_subscription_id=""
+azure_client_id=""
+azure_client_secret=""
+azure_tenant_id=""
+aws_access_key_id=""
+aws_secret_access_key=""
 ```
+
+
 
 ### Add the docker compose files (and systemd configuration)
 `git clone https://github.com/jvenema/liveswitch-docker-compose.git`
 
 
 ### Install packer
-Go to packer.io for details on this one.
+Go to packer.io for details on this one. Then make sure you run:
+
+```bash
+packer init .
+packer fmt .
+packer validate .
+```
 
 # Validate the configuration
-`packer validate -var-file=variables.json template.json`
+`packer validate template.pkr.hcl`
 
 # Build a new image
-`packer build -var-file=variables.json template.json`
+`packer build template.pkr.hcl`
 
 # Misc notes
 
@@ -44,15 +52,18 @@ Second, you need to create the account that will be used to create the image:
 PS, if you are unsure of your subscription id:
 `az account show --query "{ subscription_id: id }"`
 
-One-liner of the above that creates the account based on your current subscription:
-az ad sp create-for-rbac --role Contributor --scopes /subscriptions/$(az account show --query "id" -o tsv) --query "{ client_id: appId, client_secret: password, tenant_id: tenant }"
+One-liner that combines the two commands above that creates the account based on your current subscription:
+`az ad sp create-for-rbac --role Contributor --scopes /subscriptions/$(az account show --query "id" -o tsv) --query "{ client_id: appId, client_secret: password, tenant_id: tenant }"`
 
 Copy/paste the output into the variables.json file as noted above.
+
+### AWS
+
+https://learn.hashicorp.com/tutorials/packer/get-started-install-cli?in=packer/aws-get-started
 
 #### Other helpful tips
 To find a list of servers on Azure you can use the Azure command line tool: `az vm image list --output table`
 To find a list of server sizes on Azure you can use the Azure command line tool: `az vm list-sizes --location eastus --output table`
-To find a list of server sizes available in a given region: `az vm list-skus --location eastus --size Standard_D --all --output table`
-
+To find a list of server SKUs available in a given region: `az vm list-skus -l eastus --query "[].name" -o table`
 
 az ad sp create-for-rbac --role Contributor --scopes /subscriptions/$(az account show --query "{ subscription_id: id }") --query "{ client_id: appId, client_secret: password, tenant_id: tenant }"
