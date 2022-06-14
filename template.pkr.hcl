@@ -64,15 +64,16 @@ build {
   }
 
   provisioner "file" {
-    destination = "/tmp"
+    destination = "/opt/liveswitch"
     source      = "liveswitch-docker-compose/"
   }
 
   provisioner "shell" {
-    scripts = ["install.sh", "cleanup.sh", "img_check.sh"]
+    scripts = ["install.sh"]
   }
 
   provisioner "shell" {
+    only = ["digitalocean"]
     expect_disconnect = true
     scripts           = ["finalize.sh"]
   }

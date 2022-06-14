@@ -51,7 +51,7 @@ sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-
 sudo chmod +x /usr/local/bin/docker-compose
 
 # liveswitch docker compose
-sudo cp /tmp/docker-compose-liveswitch.service /etc/systemd/system/
+sudo cp /opt/liveswitch/docker-compose-liveswitch.service /etc/systemd/system/
 sudo systemctl enable docker
 sudo systemctl enable docker-compose-liveswitch
 sudo systemctl start docker-compose-liveswitch
