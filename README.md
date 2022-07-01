@@ -35,8 +35,11 @@ packer fmt .
 # Validate the configuration
 `packer validate .`
 
-# Build a new image
+# Build all new images
 `packer build .`
+
+# Build a specific image
+`packer build -only=azure.ubuntu .`
 
 # Misc notes
 

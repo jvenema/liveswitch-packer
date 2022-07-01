@@ -35,7 +35,7 @@ source "azure-arm" "ubuntu" {
   client_secret                     = "${var.azure_client_secret}"
   image_offer                       = "UbuntuServer"
   image_publisher                   = "Canonical"
-  image_sku                         = "20.04-LTS"
+  image_sku                         = "18.04-LTS"
   location                          = "East US"
   managed_image_name                = "PackerLiveSwitchImage"
   managed_image_resource_group_name = "PackerLiveSwitchGroup"
